@@ -1,9 +1,13 @@
 <script lang="ts">
 	import Timer from "./components/Timer.svelte";
+	import Popup from "./components/Popup.svelte";
+
+	let rounds = 3;
+
 </script>
 
 <main>
-	<Timer />
+	<Timer duration={30 * 60} />
 </main>
 
 <style>

@@ -3,50 +3,49 @@
 		NEW,
 		RUNNING,
 		PAUSED,
-	}
-
+	};
 	let state: STATE = STATE.NEW;
-	let startTime: number = 0;
-	let elapsedTime: number = 0;
-	let oldElapsedTime: number = 0;
+
+	export let duration = 25 * 60;
 	let interval: number;
 
-	$: seconds = (elapsedTime % 60).toString().padStart(2, 0);
-	$: minutes = Math.floor(elapsedTime / 60)
+	$: seconds = (duration % 60).toString().padStart(2, 0);
+	$: minutes = Math.floor(duration / 60)
 		.toString()
 		.padStart(2, 0);
 	$: formatted = `${minutes}:${seconds}`;
 
 	const start = () => {
 		state = STATE.RUNNING;
-		oldElapsedTime = 0;
-		startTime = Date.now();
 		interval = setInterval(() => {
-			if (state === STATE.RUNNING)
-				elapsedTime =
-					Math.floor((Date.now() - startTime) / 1000) + oldElapsedTime;
+			if (state === STATE.RUNNING) {
+				duration -= 1;
+				if (duration < 0) {
+					duration = 100;
+					clearInterval(interval);
+				}
+			}
 		}, 1000);
-	};
-
-	const reset = () => {
-		state = STATE.NEW;
-		elapsedTime = 0;
-		clearInterval(interval);
 	};
 
 	const pause = () => {
 		state = STATE.PAUSED;
-		oldElapsedTime = elapsedTime;
 	};
 
 	const resume = () => {
-		startTime = Date.now();
 		state = STATE.RUNNING;
+	};
+
+	const reset = () => {
+		state = STATE.NEW;
+		clearInterval(interval);
 	};
 </script>
 
 <div>
-	<h1>{formatted}</h1>
+	<div class="display">
+		<h1>{formatted}</h1>
+	</div>
 	<div class="buttons">
 		{#if state === STATE.NEW}
 			<button on:click={start}> start </button>
@@ -71,24 +70,6 @@
 		align-items: center;
 	}
 
-	button {
-		border-width: 2px;
-		border-color: white;
-		border-radius: 0.5rem;
-		border-style: solid;
-		padding-inline: 2rem;
-		padding-block: 0.8rem;
-		background: none;
-		color: white;
-		font-size: 1.2rem;
-		text-transform: uppercase;
-	}
-
-	button:hover {
-		border-color: grey;
-		color: grey;
-	}
-
 	h1 {
 		font-size: 10rem;
 	}
@@ -99,5 +80,9 @@
 		justify-content: center;
 		align-items: center;
 		column-gap: 1rem;
+	}
+	.display {
+		display: flex;
+		flex-direction: row;
 	}
 </style>
