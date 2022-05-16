@@ -6,7 +6,8 @@
 	};
 	let state: STATE = STATE.NEW;
 
-	export let duration = 25 * 60;
+	export let duration = 25;
+	duration *= 60;
 	let original = duration;
 	let interval: number;
 

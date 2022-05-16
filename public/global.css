@@ -5,6 +5,7 @@ body {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     Liberation Mono, Courier New, monospace;
   background-color: black;
+  font-size: 1.1rem;
   color: white;
 }
 
@@ -22,11 +23,23 @@ button {
   padding-block: 0.8rem;
   background: none;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
 }
 
 button:hover {
   border-color: grey;
   color: grey;
+}
+
+input {
+  border-width: 2px;
+	border-radius: 0.5rem;
+  border-style: solid;
+  padding: 1rem;
+  width: 100%;
+  background: none;
+  color: white;
+  flex-grow: 2;
+  font-size: 1.1rem;
 }

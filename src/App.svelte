@@ -11,8 +11,7 @@
 	let page = PAGE.TIMER;
 
 	let rounds = 3;
-	let started = false;
-	let timer;
+	let duration = 25;
 </script>
 
 <svelte:head>
@@ -24,12 +23,12 @@
 
 <main>
 	{#if page === PAGE.TIMER}
-		<Timer duration={10 * 60} bind:this={timer} />
+		<Timer {duration} />
 		<div>
 			<i class="mi mi-settings" on:click={() => page = PAGE.SETTINGS} />
 		</div>
 	{:else}
-		<Settings/>
+		<Settings bind:duration={duration}/>
 		<div>
 			<i class="mi mi-arrow-left" on:click={() => page = PAGE.TIMER} />
 		</div>
