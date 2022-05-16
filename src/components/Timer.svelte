@@ -7,6 +7,7 @@
 	let state: STATE = STATE.NEW;
 
 	export let duration = 25 * 60;
+	let original = duration;
 	let interval: number;
 
 	$: seconds = (duration % 60).toString().padStart(2, 0);
@@ -15,14 +16,13 @@
 		.padStart(2, 0);
 	$: formatted = `${minutes}:${seconds}`;
 
-	const start = () => {
+	export const start = () => {
 		state = STATE.RUNNING;
 		interval = setInterval(() => {
 			if (state === STATE.RUNNING) {
 				duration -= 1;
 				if (duration < 0) {
-					duration = 100;
-					clearInterval(interval);
+					reset();
 				}
 			}
 		}, 1000);
@@ -39,6 +39,7 @@
 	const reset = () => {
 		state = STATE.NEW;
 		clearInterval(interval);
+		duration = original;
 	};
 </script>
 

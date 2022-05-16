@@ -3,11 +3,12 @@
 	import Popup from "./components/Popup.svelte";
 
 	let rounds = 3;
-
+	let started = false;
+	let timer;
 </script>
 
 <main>
-	<Timer duration={30 * 60} />
+	<Timer duration={10} bind:this={timer}/>
 </main>
 
 <style>
