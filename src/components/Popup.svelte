@@ -1,5 +1,3 @@
-<script></script>
-
 <div>
 	<div>
 		<p>
