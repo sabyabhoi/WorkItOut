@@ -4,11 +4,11 @@
 	import Settings from "./components/Settings.svelte";
 
 	enum PAGE {
-		TIMER,
+		FOCUS,
 		SETTINGS,
 	}
 
-	let page = PAGE.TIMER;
+	let page = PAGE.FOCUS;
 
 	let rounds = 3;
 	let duration = 25;
@@ -22,15 +22,15 @@
 </svelte:head>
 
 <main>
-	{#if page === PAGE.TIMER}
-		<Timer {duration} />
+	{#if page === PAGE.FOCUS}
+		<Timer {duration} autostart={false}/>
 		<div>
 			<i class="mi mi-settings" on:click={() => page = PAGE.SETTINGS} />
 		</div>
 	{:else}
 		<Settings bind:duration={duration}/>
 		<div>
-			<i class="mi mi-arrow-left" on:click={() => page = PAGE.TIMER} />
+			<i class="mi mi-arrow-left" on:click={() => page = PAGE.FOCUS} />
 		</div>
 	{/if}
 </main>

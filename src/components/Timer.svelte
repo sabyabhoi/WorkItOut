@@ -3,9 +3,10 @@
 		NEW,
 		RUNNING,
 		PAUSED,
-	};
+	}
 	let state: STATE = STATE.NEW;
 
+	export let autostart = false;
 	export let duration = 25;
 	duration *= 60;
 	let original = duration;
@@ -42,6 +43,8 @@
 		clearInterval(interval);
 		duration = original;
 	};
+
+	if (autostart) start();
 </script>
 
 <div>
