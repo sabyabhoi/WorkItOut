@@ -1,4 +1,7 @@
 <script lang="ts">
+
+	import { createEventDispatcher } from 'svelte';
+
 	enum STATE {
 		NEW,
 		RUNNING,
@@ -9,8 +12,10 @@
 	export let autostart = false;
 	export let duration = 25;
 	duration *= 60;
+
 	let original = duration;
 	let interval: number;
+	let dispatch = createEventDispatcher();
 
 	$: seconds = (duration % 60).toString().padStart(2, 0);
 	$: minutes = Math.floor(duration / 60)
@@ -24,6 +29,7 @@
 			if (state === STATE.RUNNING) {
 				duration -= 1;
 				if (duration < 0) {
+					dispatch('end');
 					reset();
 				}
 			}
