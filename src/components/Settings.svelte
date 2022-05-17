@@ -27,7 +27,7 @@
 				bind:value={breakDuration}
 				on:change={(e) => (breakDuration = e.target.value)}
 			/>
-			<button on:click={() => (breakDuration = 25)}>Defaults</button>
+			<button on:click={() => (breakDuration = 5)}>Defaults</button>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Timer from "./components/Timer.svelte";
 	import Settings from "./components/Settings.svelte";
+	import { sendNotification } from '@tauri-apps/api/notification';
 
 	enum PAGE {
 		FOCUS,
@@ -24,8 +25,10 @@
 		} else {
 			autostart = true;
 			if (page === PAGE.FOCUS) {
+				sendNotification(`Take a break for ${breakDuration} minutes`);
 				page = PAGE.TIMEOUT;
 			} else if (page === PAGE.TIMEOUT) {
+				sendNotification("Alright, break over");
 				currentRound++;
 				page = PAGE.FOCUS;
 			}
@@ -70,18 +73,16 @@
 		height: 100vh;
 		width: 100%;
 
-		display: grid;
-		place-items: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		row-gap: 3em;
 	}
 	div {
 		position: absolute;
 		top: 1rem;
 		left: 1rem;
 		font-size: 1.3rem;
-	}
-
-	h1 {
-		position: absolute;
-		top: 6rem;
 	}
 </style>
