@@ -17,8 +17,10 @@
 	let breakDuration = 5;
 	let autostart = false;
 	let startTimer;
+	const audio = new Audio('sound.oga');
 
 	const nextRound = () => {
+		audio.play();
 		if (currentRound >= totalRounds) {
 			currentRound = 1;
 			autostart = false;
